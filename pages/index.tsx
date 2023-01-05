@@ -64,7 +64,10 @@ export default function Home() {
               className=" px-4 rounded p-2
               transition ease-in-out bg-blue-300 hover:-translate-y-0.5 
               hover:cursor-pointer hover:bg-blue-400 duration-300"
-              onClick={() => setArea(city)}
+              onClick={() => {
+                if (city === "alle") city = "";
+                setArea(city);
+              }}
             >
               {capitalize(city)}
             </li>
@@ -79,7 +82,7 @@ export default function Home() {
         </div>
         {/* <div className=" text-right px-4 py-2">{ads.length} Pages loaded😎</div> */}
         {ads.map((list: Page) => (
-          <AdContainer ads={list.ads} />
+          <AdContainer key={list._id} ads={list.ads} />
         ))}
         <Footer />
       </main>

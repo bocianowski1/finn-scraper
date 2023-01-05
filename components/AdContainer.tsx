@@ -33,7 +33,7 @@ const AdContainer = ({ ads }: Ads) => {
     <div className=" bg-white px-6 py-2">
       {ads.map((ad: Ad) => (
         <Advertisement
-          key={ad.title}
+          key={ad.title + ad.link + ad.bedrooms}
           title={ad.title}
           features={ad.features}
           link={ad.link}

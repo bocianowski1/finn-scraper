@@ -40,9 +40,8 @@ const Advertisement = ({
         <div className="flex justify-around absolute w-full rounded-t-md">
           {images.length > 0 &&
             images.map((image) => (
-              <div className="aspect-auto max-h-40">
+              <div key={image + Math.random()} className="aspect-auto max-h-40">
                 <img
-                  key={image}
                   src={image}
                   alt="no"
                   className="w-full h-full object-center object-cover rounded-t-md"
@@ -65,20 +64,22 @@ const Advertisement = ({
             </span>
           </div>
           <div className=" flex items-center rounded ">
-            <span className="mx-2 text-center">{bedrooms} soverom</span>
+            {bedrooms > 0 && (
+              <span className="mx-2 text-center">{bedrooms} soverom</span>
+            )}
             <FaBed className="mx-2" />
             <span className="mx-8">{housingType}</span>
           </div>
-          <a
+          {/* <a
             href={link}
             target="_blank"
             className=" flex items-center rounded p-2
           transition ease-in-out bg-blue-300 hover:-translate-y-0.5 
           hover: hover:bg-blue-400 duration-300"
           >
-            {/* <BsMegaphone /> */}
+            
             <p className="px-0 text-center ">Se annonsen i Finn.no</p>
-          </a>
+          </a> */}
         </div>
       </div>
     </Link>
