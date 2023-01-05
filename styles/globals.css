@@ -1,19 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
 
-h1 {
-  text-align: center;
-  margin: 20px;
-}
-
 a {
   color: inherit;
   text-decoration: none;
 }
-
+/* 
 .ad-container {
   height: 200px;
   width: 300px;
@@ -33,4 +32,4 @@ a {
   justify-content: space-around;
   align-items: center;
   padding: 10px;
-}
+} */

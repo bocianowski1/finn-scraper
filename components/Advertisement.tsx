@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 interface Ad {
@@ -19,12 +20,12 @@ interface Ad {
 
 const Advertisement = ({ title, link, bedrooms }: Ad) => {
   return (
-    <a href={link} target="_blank">
-      <div className="ad-container">
+    <Link href={`/advertisement/${title}`}>
+      <div className=" bg-white border-solid py-4 px-2 my-8  rounded-md shadow-2xl h-40">
         <h3>{title}</h3>
         <p>Antall soverom: {bedrooms}</p>
       </div>
-    </a>
+    </Link>
   );
 };
 

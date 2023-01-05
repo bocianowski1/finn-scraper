@@ -43,7 +43,7 @@ const areas = {
 };
 
 // number of pages to scrape
-const N = 3;
+const N = 1;
 
 // SCRAPING
 const getRealEstate = (n, location) => {
