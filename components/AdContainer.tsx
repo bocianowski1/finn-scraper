@@ -29,13 +29,19 @@ interface Ad {
 
 const AdContainer = ({ ads }: Ads) => {
   return (
-    <div className=" bg-gradient-to-tr from-blue-900 to-blue-400 px-6 py-2">
+    // <div className=" bg-gradient-to-tr from-blue-900 to-blue-400 px-6 py-2">
+    <div className=" bg-white px-6 py-2">
       {ads.map((ad: Ad) => (
         <Advertisement
           key={ad.title}
           title={ad.title}
+          features={ad.features}
           link={ad.link}
+          location={ad.location}
+          housingType={ad.housingType}
           bedrooms={ad.bedrooms}
+          landlord={ad.landlord}
+          images={ad.images}
         />
       ))}
     </div>

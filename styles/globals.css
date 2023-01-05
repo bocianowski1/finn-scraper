@@ -12,24 +12,3 @@ a {
   color: inherit;
   text-decoration: none;
 }
-/* 
-.ad-container {
-  height: 200px;
-  width: 300px;
-  border: solid black;
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  margin: 5px;
-}
-
-.ads-container {
-  border: solid red;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  padding: 10px;
-} */

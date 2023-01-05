@@ -32,6 +32,11 @@ interface Ad {
 export default function Home() {
   const [ads, setAds] = useState([]);
   const [area, setArea] = useState("");
+  const cities = ["alle", "oslo", "viken", "bergen", "trondheim"];
+
+  const capitalize = (str: string) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
 
   useEffect(() => {
     axios
@@ -53,37 +58,25 @@ export default function Home() {
         <Navbar />
         <Header />
         <ul className=" flex justify-between p-4">
-          <li
-            className=" bg-blue-300 rounded-md shadow-lg px-4 py-2 hover:cursor-pointer"
-            onClick={() => setArea("")}
-          >
-            Alle
-          </li>
-          <li
-            className=" bg-blue-300 rounded-md shadow-lg px-4 py-2 hover:cursor-pointer"
-            onClick={() => setArea("oslo")}
-          >
-            Oslo
-          </li>
-          <li
-            className=" bg-blue-300 rounded-md shadow-lg px-4 py-2 hover:cursor-pointer"
-            onClick={() => setArea("viken")}
-          >
-            Viken
-          </li>
-          <li
-            className=" bg-blue-300 rounded-md shadow-lg px-4 py-2 hover:cursor-pointer"
-            onClick={() => setArea("bergen")}
-          >
-            Bergen
-          </li>
-          <li
-            className=" bg-blue-300 rounded-md shadow-lg px-4 py-2 hover:cursor-pointer"
-            onClick={() => setArea("trondheim")}
-          >
-            Trondheim
-          </li>
+          {cities.map((city) => (
+            <li
+              key={city}
+              className=" px-4 rounded p-2
+              transition ease-in-out bg-blue-300 hover:-translate-y-0.5 
+              hover:cursor-pointer hover:bg-blue-400 duration-300"
+              onClick={() => setArea(city)}
+            >
+              {capitalize(city)}
+            </li>
+          ))}
         </ul>
+        <div className=" p-2">
+          {area.length === 0 ? (
+            <h3>Resultater for hele Norge:</h3>
+          ) : (
+            <h3>Resultater for {capitalize(area)}:</h3>
+          )}
+        </div>
         {/* <div className=" text-right px-4 py-2">{ads.length} Pages loaded😎</div> */}
         {ads.map((list: Page) => (
           <AdContainer ads={list.ads} />
