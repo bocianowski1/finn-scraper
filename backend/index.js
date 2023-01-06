@@ -146,7 +146,6 @@ app.get("/", (req, res) => {
   res.json({ result });
 });
 
-console.log(result.length, "pages loaded");
 for (let i = 0; i < result.length; i++) {
   app.get(`/${i}`, (req, res) => {
     res.json({ page: i, result: result[i].ads });
@@ -173,4 +172,5 @@ app.get("/:page/:id", async (req, res) => {
   // axios.get();
 });
 
+console.log("result length", result.length);
 app.listen(PORT, () => console.log(`Running on port ${PORT}`));

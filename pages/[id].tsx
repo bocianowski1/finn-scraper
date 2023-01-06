@@ -61,20 +61,67 @@ export const getStaticProps = async (context: any) => {
 const AdvertismentPage = ({ ad }: Props) => {
   const add = ad[0];
   return (
-    <div>
-      <div className="flex justify-around w-full rounded-t-md">
-        {add.images.length > 0 &&
-          add.images.map((image) => (
-            <div key={add.id + Math.random()} className="aspect-auto max-h-40">
-              <img
-                src={image}
-                alt="no"
-                className="w-full h-full object-center object-cover rounded-t-md"
-              />
+    <div className="bg-zinc-300 pt-36 pb-12">
+      <div
+        className="bg-gradient-to-br from-gray-100 to-gray-300
+                      p-4 mx-4 rounded-xl shadow-md flex flex-col"
+      >
+        <div className="flex justify-around w-full h-48 mt-4">
+          <div className="aspect-auto w-full">
+            <img
+              src={add.images[0]}
+              alt="no"
+              className="w-full h-full object-center rounded-md
+                          shadow-md object-cover md:h-40"
+            />
+          </div>
+          <div className=" w-6 h-full" />
+          <div className="aspect-auto w-full">
+            <img
+              src={add.images[1]}
+              alt="no"
+              className="w-full h-full object-center rounded-md
+                          shadow-md object-cover md:h-40"
+            />
+          </div>
+        </div>
+        <div className="flex flex-col">
+          <h1 className="text-left py-6 font-medium text-3xl">{add.title}</h1>
+          <a
+            href={add.link}
+            target="_blank"
+            className="bg-gradient-to-b from-neutral-200 to-zinc-300 shadow-lg text-center rounded-xl p-2 my-2
+          transition ease-in-out hover:shadow-xl hover:-translate-y-0.5 
+          hover:cursor-pointer duration-300"
+          >
+            <p className="px-0 text-center ">Se annonsen i Finn.no</p>
+          </a>
+        </div>
+        <div
+          className="bg-gradient-to-b from-neutral-200 to-zinc-300 
+                        border border-gray-300 shadow-lg rounded-xl my-6"
+        >
+          <div className="text-lg py-2 px-4">
+            <h3 className="text-center font-semibold my-4">
+              {add.location.address}
+            </h3>
+            <div className="flex justify-between font-medium mx-2">
+              <span>{add.features.monthlyRent} kr</span>
+              <div className="mx-2">
+                {add.features.squareMeters} m
+                <span className=" text-xs font-bold absolute">2</span>
+              </div>
             </div>
-          ))}
+          </div>
+          <div className="m-4">
+            <h4>
+              {add.housingType} i {add.location.city} med {add.bedrooms}{" "}
+              soverom.
+            </h4>
+            <span>Utleier: {add.landlord}</span>
+          </div>
+        </div>
       </div>
-      <h1>Hei: {add.title}</h1>
     </div>
   );
 };

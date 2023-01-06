@@ -35,60 +35,67 @@ const Advertisement = ({
 }: Ad) => {
   const [pageNumber, setPageNumber] = useState(0);
   return (
-    <Link href={`/${id}`}>
-      <div
-        className=" bg-gray-100 flex relative pb-8
-      my-8 rounded-md shadow-2xl h-96 w-auto"
-      >
-        {/* <div className=" overflow-hidden transition-all outline-none sf-ad-outline sf-ad-card rounded-8 mt-24 mx-16 mb-16 sm:mb-24  grid f-grid grid-cols-2"> */}
-        <div className="flex justify-around absolute w-full rounded-t-md">
-          {images.length > 0 &&
-            images.map((image) => (
-              <div key={id + Math.random()} className="aspect-auto max-h-40">
-                <img
-                  src={image}
-                  alt="no"
-                  className="w-full h-full object-center object-cover rounded-t-md"
-                />
-              </div>
-            ))}
-        </div>
-        <div className=" bg-red-300 absolute bottom-2 h-52 w-full flex-col">
-          <span>
-            {landlord} i {location.city}
-          </span>
-          <h3 className=" mx-2 font-semibold text-lg ">{title}</h3>
-          <h4>{location.address}</h4>
-          <div className="bg-green-200 flex justify-start">
-            <span className="mx-2 font-semibold">
-              {features.monthlyRent} kr
-            </span>
-            <span className="mx-2 font-semibold">
-              {features.squareMeters} kvadratmeter
-            </span>
+    <div
+      className="bg-gradient-to-br from-gray-100 to-gray-300 mx-4
+        my-8 rounded-xl shadow-xl h-96 w-auto 
+        transition ease-in-out md:hover:-translate-y-1 
+              hover:cursor-pointer hover:shadow-2xl duration-300"
+    >
+      <Link href={`/${id}`}>
+        <div className="flex flex-col p-2 h-96">
+          <div className="flex justify-around w-full h-48 md:h-40">
+            <div className="aspect-auto w-full">
+              <img
+                src={images[0]}
+                alt="no"
+                className="w-full h-full object-center 
+                          object-cover rounded-tl-xl md:h-40"
+              />
+            </div>
+            <div className=" w-1 h-full" />
+            <div className="aspect-auto w-full">
+              <img
+                src={images[1]}
+                alt="no"
+                className="w-full h-full object-center 
+                          object-cover rounded-tr-xl md:h-40"
+              />
+            </div>
           </div>
-          <div className=" flex items-center rounded ">
-            {bedrooms > 0 && (
-              <>
-                <span className="mx-2 text-center">{bedrooms} soverom</span>
-                <FaBed className="mx-2" />
-              </>
+          <div className="mx-2 py-4 md:h-60 ">
+            <div className="flex justify-between md:flex-col">
+              <span className="font-thin text-sm md:my-2">{landlord}</span>
+              <span className=" font-extralight text-sm">
+                {location.address}
+              </span>
+            </div>
+            {title.length >= 60 ? (
+              <h2 className="py-2 font-semibold md:pt-4">
+                {title.substring(0, 60) + "..."}
+              </h2>
+            ) : (
+              <h2 className="py-2 font-semibold md:pt-4">{title}</h2>
             )}
-            <span className="mx-8">{housingType}</span>
+
+            <div className="pt-2 grid grid-cols-2 w-3/4 font-semibold relative">
+              <span>{features.monthlyRent} kr</span>
+              <div>
+                {features.squareMeters} m
+                <span className=" text-xs font-bold absolute">2</span>
+              </div>
+            </div>
+            <div className=" grid grid-cols-2 w-3/4 ">
+              {bedrooms == 0 ? (
+                <span>Hybel</span>
+              ) : (
+                <span>{bedrooms} soverom</span>
+              )}
+              <span>{housingType}</span>
+            </div>
           </div>
-          {/* <a
-            href={link}
-            target="_blank"
-            className=" flex items-center rounded p-2
-          transition ease-in-out bg-blue-300 hover:-translate-y-0.5 
-          hover: hover:bg-blue-400 duration-300"
-          >
-            
-            <p className="px-0 text-center ">Se annonsen i Finn.no</p>
-          </a> */}
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 };
 

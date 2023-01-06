@@ -3,7 +3,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import AdContainer from "../components/AdContainer";
 import Advertisement from "../components/Advertisement";
-import Header from "../components/Header";
 
 interface Page {
   _id: number;
@@ -49,19 +48,25 @@ export default function Home() {
   return (
     <div className=" bg-white">
       <Head>
-        <title>Finn Scraper</title>
-        <meta name="description" content="Finn Scraper" />
+        <title>Fake Finn</title>
+        <meta name="description" content="Fake Finn" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <Header />
-        <ul className=" flex justify-between p-4">
+      <main className="bg-zinc-300">
+        <div className="px-10 font-medium text-xl pt-36 pb-4">
+          {area.length === 0 ? (
+            <h3>Resultater for hele Norge:</h3>
+          ) : (
+            <h3>Resultater for {capitalize(area)}:</h3>
+          )}
+        </div>
+        <ul className="px-10 md:grid grid-flow-row grid-cols-5 gap-4 ">
           {cities.map((city) => (
             <li
               key={city}
-              className=" px-4 rounded p-2
-              transition ease-in-out bg-blue-300 hover:-translate-y-0.5 
-              hover:cursor-pointer hover:bg-blue-400 duration-300"
+              className="bg-gradient-to-b from-neutral-200 to-zinc-300 shadow-lg text-center rounded-xl p-2 my-2
+              transition ease-in-out hover:shadow-xl hover:-translate-y-0.5 
+              hover:cursor-pointer duration-300"
               onClick={() => {
                 if (city === "alle") city = "";
                 setArea(city);
@@ -71,14 +76,6 @@ export default function Home() {
             </li>
           ))}
         </ul>
-        <div className=" p-2">
-          {area.length === 0 ? (
-            <h3>Resultater for hele Norge:</h3>
-          ) : (
-            <h3>Resultater for {capitalize(area)}:</h3>
-          )}
-        </div>
-        {/* <div className=" text-right px-4 py-2">{ads.length} Pages loaded😎</div> */}
         {ads.map((list: Page) => (
           <AdContainer key={list._id} ads={list.ads} />
         ))}
