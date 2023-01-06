@@ -69,6 +69,7 @@ const getRealEstate = (n, location) => {
         const atag = $(this).find(
           'a[class="link link--dark sf-ad-link sf-realestate-heading"]'
         );
+        const id = parseInt(atag.attr("id"));
         const title = atag.text();
         let features = $(this)
           .find(
@@ -113,6 +114,7 @@ const getRealEstate = (n, location) => {
           });
 
         ads.push({
+          id,
           title,
           features,
           link,
@@ -142,6 +144,33 @@ for (const area in areas) {
 const result = getRealEstate(N);
 app.get("/", (req, res) => {
   res.json({ result });
+});
+
+console.log(result.length, "pages loaded");
+for (let i = 0; i < result.length; i++) {
+  app.get(`/${i}`, (req, res) => {
+    res.json({ page: i, result: result[i].ads });
+  });
+}
+// let t = "286621845";
+// app.get("/test", (req, res) => {
+//   res.json({ ads: result[0].ads });
+// });
+
+app.get("/:page/:id", async (req, res) => {
+  const page = req.params.page;
+  const id = req.params.id;
+
+  const index = parseInt(page);
+  const ads = result[index].ads;
+
+  // console.log(page, id, ads.length);
+
+  const correctAd = ads.filter((ad) => ad.id == id);
+
+  res.json({ ad: correctAd });
+
+  // axios.get();
 });
 
 app.listen(PORT, () => console.log(`Running on port ${PORT}`));

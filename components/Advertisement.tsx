@@ -1,9 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { BsMegaphone } from "react-icons/bs";
 import { FaBed } from "react-icons/fa";
 
 interface Ad {
+  id: number;
   title: string;
   features: {
     squareMeters: number;
@@ -21,6 +23,7 @@ interface Ad {
 }
 
 const Advertisement = ({
+  id,
   title,
   features,
   link,
@@ -30,8 +33,9 @@ const Advertisement = ({
   landlord,
   images,
 }: Ad) => {
+  const [pageNumber, setPageNumber] = useState(0);
   return (
-    <Link href={`/advertisement/${title}`}>
+    <Link href={`/${id}`}>
       <div
         className=" bg-gray-100 flex relative pb-8
       my-8 rounded-md shadow-2xl h-96 w-auto"
@@ -40,7 +44,7 @@ const Advertisement = ({
         <div className="flex justify-around absolute w-full rounded-t-md">
           {images.length > 0 &&
             images.map((image) => (
-              <div key={image + Math.random()} className="aspect-auto max-h-40">
+              <div key={id + Math.random()} className="aspect-auto max-h-40">
                 <img
                   src={image}
                   alt="no"
@@ -65,9 +69,11 @@ const Advertisement = ({
           </div>
           <div className=" flex items-center rounded ">
             {bedrooms > 0 && (
-              <span className="mx-2 text-center">{bedrooms} soverom</span>
+              <>
+                <span className="mx-2 text-center">{bedrooms} soverom</span>
+                <FaBed className="mx-2" />
+              </>
             )}
-            <FaBed className="mx-2" />
             <span className="mx-8">{housingType}</span>
           </div>
           {/* <a

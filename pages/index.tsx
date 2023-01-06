@@ -3,9 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import AdContainer from "../components/AdContainer";
 import Advertisement from "../components/Advertisement";
-import Footer from "../components/Footer";
 import Header from "../components/Header";
-import Navbar from "../components/Navbar";
 
 interface Page {
   _id: number;
@@ -13,6 +11,7 @@ interface Page {
 }
 
 interface Ad {
+  id: number;
   title: string;
   features: {
     squareMeters: number;
@@ -55,7 +54,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Navbar />
         <Header />
         <ul className=" flex justify-between p-4">
           {cities.map((city) => (
@@ -84,7 +82,6 @@ export default function Home() {
         {ads.map((list: Page) => (
           <AdContainer key={list._id} ads={list.ads} />
         ))}
-        <Footer />
       </main>
     </div>
   );

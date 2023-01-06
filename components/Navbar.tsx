@@ -5,7 +5,9 @@ import { FaLinkedin, FaGithub } from "react-icons/fa";
 const Navbar = () => {
   return (
     <nav className=" bg-gradient-to-tr from-blue-900 to-blue-400 flex justify-between py-8 px-4 w-screen text-gray-200 ">
-      <h2 className="text-2xl font-bold">Torger</h2>
+      <Link href={"/"} className=" cursor-pointer">
+        <h2 className="text-2xl font-bold">Torger</h2>
+      </Link>
       <ul className=" flex items-center text-gray-100 ">
         <li className=" mx-2">
           <Link

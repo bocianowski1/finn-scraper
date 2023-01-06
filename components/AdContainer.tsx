@@ -11,6 +11,7 @@ interface Ads {
 }
 
 interface Ad {
+  id: number;
   title: string;
   features: {
     squareMeters: number;
@@ -29,11 +30,11 @@ interface Ad {
 
 const AdContainer = ({ ads }: Ads) => {
   return (
-    // <div className=" bg-gradient-to-tr from-blue-900 to-blue-400 px-6 py-2">
     <div className=" bg-white px-6 py-2">
       {ads.map((ad: Ad) => (
         <Advertisement
-          key={ad.title + ad.link + ad.bedrooms}
+          key={ad.id}
+          id={ad.id}
           title={ad.title}
           features={ad.features}
           link={ad.link}
