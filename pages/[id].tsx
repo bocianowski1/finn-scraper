@@ -1,5 +1,6 @@
 import axios from "axios";
-import { IMAGES_MANIFEST } from "next/dist/shared/lib/constants";
+import { useState } from "react";
+import { FaCaretLeft, FaCaretRight } from "react-icons/fa";
 
 interface Props {
   params: {
@@ -59,31 +60,55 @@ export const getStaticProps = async (context: any) => {
 };
 
 const AdvertismentPage = ({ ad }: Props) => {
+  const [currentImage, setCurrentImage] = useState(0);
   const add = ad[0];
+
+  const changeImage = () => {
+    if (currentImage == 1) setCurrentImage(0);
+    else setCurrentImage(1);
+  };
+
   return (
     <div className="bg-zinc-300 pt-36 pb-12">
       <div
         className="bg-gradient-to-br from-gray-100 to-gray-300
                       p-4 mx-4 rounded-xl shadow-md flex flex-col"
       >
-        <div className="flex justify-around w-full h-48 mt-4">
+        <div className="flex w-full h-48 mt-4">
+          <div
+            className="flex items-center text-5xl w-12
+            hover:cursor-pointer hover:text-zinc-600 duration-300"
+            onClick={() => changeImage()}
+          >
+            <FaCaretLeft className="transition ease-in-out" />
+          </div>
           <div className="aspect-auto w-full">
             <img
-              src={add.images[0]}
+              src={add.images[currentImage]}
               alt="no"
               className="w-full h-full object-center rounded-md
                           shadow-md object-cover md:h-40"
             />
           </div>
-          <div className=" w-6 h-full" />
+          <div
+            className="flex items-center text-5xl w-12
+            hover:cursor-pointer hover:text-zinc-600 duration-300"
+            onClick={() => changeImage()}
+          >
+            <FaCaretRight />
+          </div>
+          {/* <div className=" w-6 h-full" />
           <div className="aspect-auto w-full">
             <img
               src={add.images[1]}
               alt="no"
               className="w-full h-full object-center rounded-md
-                          shadow-md object-cover md:h-40"
+                          shadow-md object-cover md:h-40
+                          transition ease-in hover:absolute
+                          hover:left-0 hover:px-8
+                          hover:h-60 duration-300"
             />
-          </div>
+          </div> */}
         </div>
         <div className="flex flex-col">
           <h1 className="text-left py-6 font-medium text-3xl">{add.title}</h1>
