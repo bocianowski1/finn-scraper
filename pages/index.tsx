@@ -52,7 +52,7 @@ export default function Home() {
         <meta name="description" content="Fake Finn" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="bg-zinc-300">
+      <main className="bg-gray-100">
         <div className="px-10 font-medium text-xl pt-36 pb-4">
           {area.length === 0 ? (
             <h3>Resultater for hele Norge:</h3>
@@ -64,8 +64,9 @@ export default function Home() {
           {cities.map((city) => (
             <li
               key={city}
-              className="bg-gradient-to-b from-neutral-200 to-zinc-300 shadow-lg text-center rounded-xl p-2 my-2
-              transition ease-in-out hover:shadow-xl hover:-translate-y-0.5 
+              className="bg-gradient-to-b from-slate-100 to-zinc-200 shadow-lg
+              font-medium text-center rounded-xl p-2 my-2
+              transition ease-in-out hover:shadow-xl hover:-translate-y-1 
               hover:cursor-pointer duration-300"
               onClick={() => {
                 if (city === "alle") city = "";
@@ -76,9 +77,7 @@ export default function Home() {
             </li>
           ))}
         </ul>
-        {ads.map((list: Page) => (
-          <AdContainer key={list._id} ads={list.ads} />
-        ))}
+        <AdContainer ads={ads} />
       </main>
     </div>
   );

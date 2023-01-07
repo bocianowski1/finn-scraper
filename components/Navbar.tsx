@@ -5,7 +5,7 @@ import { FaLinkedin, FaGithub } from "react-icons/fa";
 const Navbar = () => {
   return (
     <nav
-      className="bg-gradient-to-b from-zinc-500 to-zinc-300 
+      className="bg-gray-100 shadow-md
       flex justify-between py-8 px-4 w-screen
       fixed left-0 top-0 z-10"
     >

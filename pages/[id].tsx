@@ -28,8 +28,7 @@ interface Ad {
 }
 
 export const getStaticPaths = async () => {
-  const res = await axios.get("http://localhost:8000/0/");
-  // const page = await res.data.page;
+  const res = await axios.get("http://localhost:8000/");
   const data = await res.data.result;
 
   const paths = data.map((ad: Ad) => {
@@ -49,7 +48,7 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (context: any) => {
   const id = context.params.id;
 
-  const res = await axios.get(`http://localhost:8000/0/${id}/`);
+  const res = await axios.get(`http://localhost:8000/${id}/`);
   const ad = await res.data.ad;
 
   return {
@@ -67,7 +66,7 @@ const AdvertismentPage = ({ ad }: Props) => {
     if (currentImage == 1) setCurrentImage(0);
     else setCurrentImage(1);
   };
-  const formatter = new Intl.NumberFormat(undefined, {
+  const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
   });
@@ -127,7 +126,7 @@ const AdvertismentPage = ({ ad }: Props) => {
           transition ease-in-out hover:shadow-xl hover:-translate-y-0.5 
           hover:cursor-pointer duration-300"
             >
-              <p className="text-center lg:text-lg">Se annonsen i Finn.no</p>
+              <p className="text-center lg:text-lg">Se annonsen hos Finn.no</p>
             </a>
           </div>
           <div
@@ -154,8 +153,8 @@ const AdvertismentPage = ({ ad }: Props) => {
                           ? add.features.monthlyRent.toString().length + 1
                           : add.features.monthlyRent.toString().length + 2
                       )
-                      .replace(",", " ")}{" "}
-                    kr
+                      .replace(",", " ")}
+                    {" kr"}
                   </span>
                 </div>
                 <div className="py-2 font-thin grid grid-cols-1 gap-1">

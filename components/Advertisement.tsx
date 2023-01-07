@@ -44,9 +44,9 @@ const Advertisement = ({
     <>
       {features.monthlyRent && (
         <div
-          className="bg-gradient-to-br from-gray-100 to-gray-300 mx-4
+          className="bg-gradient-to-br from-gray-100 to-gray-200 mx-4
         my-8 rounded-xl shadow-xl w-auto 
-        transition ease-in-out md:hover:-translate-y-1 
+        transition ease-in-out md:hover:-translate-y-1.5 
               hover:cursor-pointer hover:shadow-2xl duration-300"
         >
           <Link href={`/${id}`}>

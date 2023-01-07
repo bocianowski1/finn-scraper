@@ -43,7 +43,7 @@ const areas = {
 };
 
 // number of pages to scrape
-const N = 1;
+const N = 3;
 
 // SCRAPING
 const getRealEstate = (n, location) => {
@@ -127,50 +127,90 @@ const getRealEstate = (n, location) => {
       });
     });
 
-    pages.push({ _id: i, ads });
+    // pages.push({ _id: i, ads });
+    pages.push({ ads });
   }
   return pages;
 };
 
-// MAJOR CITIES / AREAS
+const flattenResult = (list) => {
+  const res = [];
+  for (let i = 0; i < list.length; i++) {
+    const curr = list[i].ads;
+    for (let j = 0; j < curr.length; j++) {
+      res.push(curr[j]);
+    }
+  }
+  return res;
+};
+
+// // MAJOR CITIES / AREAS
 for (const area in areas) {
-  const result = getRealEstate(N, areas[area]);
+  const temp = getRealEstate(N, areas[area]);
   app.get(`/${area}`, (req, res) => {
-    res.json({ result });
+    const result = flattenResult(temp).slice(1);
+    res.json({ len: result.length, area, result });
   });
 }
 
 // INDEX
-const result = getRealEstate(N);
+const pages = getRealEstate(N);
 app.get("/", (req, res) => {
-  res.json({ result });
+  const result = flattenResult(pages);
+  res.json({ len: result.length, result });
 });
 
-for (let i = 0; i < result.length; i++) {
-  app.get(`/${i}`, (req, res) => {
-    res.json({ page: i, result: result[i].ads });
-  });
-}
+// for (let i = 0; i < result.length; i++) {
+//   app.get(`/${i}`, (req, res) => {
+//     res.json({ page: i, result: result[i].ads });
+//   });
+// }
+
 // let t = "286621845";
 // app.get("/test", (req, res) => {
 //   res.json({ ads: result[0].ads });
 // });
 
-app.get("/:page/:id", async (req, res) => {
-  const page = req.params.page;
+// app.get("/:id", async (req, res) => {
+//   const result = flattenResult(pages);
+//   const id = req.params.id;
+
+//   for (let i = 0; i < result.length; i++) {
+//     let curr = result[i].ads;
+//     for (let j = 0; j < curr.length; j++) {
+//       let ad = curr[j];
+//       if (ad.id == id) {
+//         res.json({ ad });
+//         break;
+//       }
+//     }
+//   }
+// });
+
+app.get("/:id", async (req, res) => {
+  const result = flattenResult(pages);
   const id = req.params.id;
 
-  const index = parseInt(page);
-  const ads = result[index].ads;
-
-  // console.log(page, id, ads.length);
-
-  const correctAd = ads.filter((ad) => ad.id == id);
+  const correctAd = result.filter((ad) => ad.id == id);
 
   res.json({ ad: correctAd });
-
-  // axios.get();
 });
 
-console.log("result length", result.length);
-app.listen(PORT, () => console.log(`Running on port ${PORT}`));
+// app.get("/:page/:id", async (req, res) => {
+//   const page = req.params.page;
+//   const id = req.params.id;
+
+//   const index = parseInt(page);
+//   const ads = result[index].ads;
+
+//   // console.log(page, id, ads.length);
+
+//   const correctAd = ads.filter((ad) => ad.id == id);
+
+//   res.json({ ad: correctAd });
+
+//   // axios.get();
+// });
+
+console.log("Number of Pages: ", pages.length);
+app.listen(PORT, () => console.log(`Running on PORT ${PORT}`));
