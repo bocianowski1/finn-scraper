@@ -120,6 +120,7 @@ const AdvertismentPage = ({ ad }: Props) => {
             <a
               href={add.link}
               target="_blank"
+              rel="noreferrer"
               className="bg-gradient-to-b from-stone-100 to-neutral-100 
             shadow-xl rounded-xl p-2 my-2 border-stone-300 border
             md:fixed md:bottom-4 md:right-16 md:px-8 
