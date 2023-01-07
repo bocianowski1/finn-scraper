@@ -23,7 +23,7 @@ export default function Home() {
   }, [area]);
 
   return (
-    <div className=" bg-white">
+    <div className=" bg-neutral-100">
       <Head>
         <title>Fake Finn</title>
         <meta name="description" content="Fake Finn" />

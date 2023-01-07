@@ -24,7 +24,8 @@ interface Ad {
 }
 
 const AdContainer = ({ ads }: Props) => {
-  const [numberOfAds, setNumberOfAds] = useState(12);
+  const defaultNumberOfAds = 12;
+  const [numberOfAds, setNumberOfAds] = useState(defaultNumberOfAds);
   const [pageNumber, setPageNumber] = useState(1);
   const [inc, setInc] = useState(0);
   const nums = [1, 2, 3, 4, 5];
@@ -33,14 +34,14 @@ const AdContainer = ({ ads }: Props) => {
   const decreasePageNumber = () => {
     if (pageNumber >= 1 && inc >= 0) {
       setPageNumber(pageNumber - 1);
-      setInc(inc - numberOfAds);
+      setInc(inc - defaultNumberOfAds);
       setNumberOfAds(12);
     }
   };
   const increasePageNumber = () => {
     if (pageNumber <= maxNumberOfPages) {
       setPageNumber(pageNumber + 1);
-      setInc(inc + numberOfAds);
+      setInc(inc + defaultNumberOfAds);
       setNumberOfAds(12);
     }
   };
@@ -48,10 +49,10 @@ const AdContainer = ({ ads }: Props) => {
   const jumpToPageNumber = (number: number) => {
     setPageNumber(number);
     setNumberOfAds(12);
-    setInc(numberOfAds * number - numberOfAds);
+    setInc(defaultNumberOfAds * number - defaultNumberOfAds);
   };
   return (
-    <div className="py-6">
+    <div className="pt-6">
       <div className="flex justify-between px-10 pt-6 md:pt-8 lg:p-12">
         {pageNumber > 1 ? (
           <button
@@ -72,7 +73,9 @@ const AdContainer = ({ ads }: Props) => {
             <div key={num}>
               {num === pageNumber ? (
                 <button
-                  className="p-1 mx-1 font-bold text-xl lg:text-2xl"
+                  className="p-1 mx-1 font-bold text-xl lg:text-2xl
+                  transition ease-in-out hover:font-extrabold
+                  hover:cursor-pointer duration-300"
                   onClick={() => {
                     jumpToPageNumber(num);
                   }}
@@ -81,7 +84,9 @@ const AdContainer = ({ ads }: Props) => {
                 </button>
               ) : (
                 <button
-                  className="p-1 mx-1 text-xs lg:text-lg"
+                  className="p-1 mx-1 text-xs lg:text-lg
+                  transition ease-in-out hover:font-bold
+                  hover:cursor-pointer duration-300"
                   onClick={() => {
                     jumpToPageNumber(num);
                   }}
