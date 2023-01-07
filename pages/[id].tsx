@@ -72,9 +72,9 @@ const AdvertismentPage = ({ ad }: Props) => {
   });
 
   return (
-    <div className="bg-zinc-300 pt-36 pb-12 lg:px-64">
+    <div className="bg-stone-300 pt-36 pb-12 lg:px-64">
       <div
-        className="bg-gradient-to-br from-gray-100 to-gray-300 
+        className="bg-neutral-100
                     p-4 mx-4 rounded-xl shadow-md flex flex-col"
       >
         <div
@@ -119,19 +119,19 @@ const AdvertismentPage = ({ ad }: Props) => {
             <a
               href={add.link}
               target="_blank"
-              className="bg-gradient-to-b from-neutral-200 to-zinc-300 
-            shadow-lg rounded-xl p-2 my-2
+              className="bg-gradient-to-b from-stone-100 to-neutral-100 
+            shadow-xl rounded-xl p-2 my-2 border-stone-300 border
             md:fixed md:bottom-4 md:right-16 md:px-8 
             lg:flex lg:items-center lg:justify-center lg:w-1/4 lg:h-12
-          transition ease-in-out hover:shadow-xl hover:-translate-y-0.5 
+          transition ease-in-out hover:-translate-y-0.5 
           hover:cursor-pointer duration-300"
             >
               <p className="text-center lg:text-lg">Se annonsen hos Finn.no</p>
             </a>
           </div>
           <div
-            className="bg-gradient-to-b from-neutral-200 to-zinc-300 
-                        border border-gray-300 shadow-lg rounded-xl my-6 md:mb-12"
+            className="bg-gradient-to-br from-stone-200 to-neutral-100 
+                        border border-gray-300 shadow-lg rounded-tl-3xl rounded-br-3xl my-6 md:mb-12"
           >
             <div className="text-lg py-2 px-4">
               <h3

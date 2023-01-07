@@ -44,29 +44,29 @@ const Advertisement = ({
     <>
       {features.monthlyRent && (
         <div
-          className="bg-gradient-to-br from-gray-100 to-gray-200 mx-4
-        my-8 rounded-xl shadow-xl w-auto 
+          className="bg-gradient-to-tl from-stone-200 to-neutral-100 mx-4
+        my-8 rounded-tl-3xl rounded-br-3xl shadow-xl w-auto border-stone-300 border
         transition ease-in-out md:hover:-translate-y-1.5 
               hover:cursor-pointer hover:shadow-2xl duration-300"
         >
           <Link href={`/${id}`}>
-            <div className="flex flex-col p-2">
+            <div className="flex flex-col p-2 m-auto">
               <div className="flex justify-around w-full h-48 md:h-40">
                 <div className="aspect-auto w-full">
                   <img
                     src={images[0]}
                     alt=""
                     className="w-full h-full object-center 
-                          object-cover rounded-tl-xl md:h-40"
+                          object-cover rounded-tl-3xl md:h-40"
                   />
                 </div>
-                <div className=" w-1 h-full" />
+                <div className="w-2 h-full" />
                 <div className="aspect-auto w-full">
                   <img
                     src={images[1]}
                     alt=""
                     className="w-full h-full object-center 
-                          object-cover rounded-tr-xl md:h-40"
+                          object-cover md:h-40"
                   />
                 </div>
               </div>
@@ -94,7 +94,7 @@ const Advertisement = ({
                         .format(features.monthlyRent)
                         .substring(
                           1,
-                          features.monthlyRent.toString().length === 3
+                          features.monthlyRent.toString().length === (1 || 3)
                             ? features.monthlyRent.toString().length + 1
                             : features.monthlyRent.toString().length + 2
                         )

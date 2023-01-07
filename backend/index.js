@@ -127,7 +127,6 @@ const getRealEstate = (n, location) => {
       });
     });
 
-    // pages.push({ _id: i, ads });
     pages.push({ ads });
   }
   return pages;
@@ -160,33 +159,6 @@ app.get("/", (req, res) => {
   res.json({ len: result.length, result });
 });
 
-// for (let i = 0; i < result.length; i++) {
-//   app.get(`/${i}`, (req, res) => {
-//     res.json({ page: i, result: result[i].ads });
-//   });
-// }
-
-// let t = "286621845";
-// app.get("/test", (req, res) => {
-//   res.json({ ads: result[0].ads });
-// });
-
-// app.get("/:id", async (req, res) => {
-//   const result = flattenResult(pages);
-//   const id = req.params.id;
-
-//   for (let i = 0; i < result.length; i++) {
-//     let curr = result[i].ads;
-//     for (let j = 0; j < curr.length; j++) {
-//       let ad = curr[j];
-//       if (ad.id == id) {
-//         res.json({ ad });
-//         break;
-//       }
-//     }
-//   }
-// });
-
 app.get("/:id", async (req, res) => {
   const result = flattenResult(pages);
   const id = req.params.id;
@@ -195,22 +167,6 @@ app.get("/:id", async (req, res) => {
 
   res.json({ ad: correctAd });
 });
-
-// app.get("/:page/:id", async (req, res) => {
-//   const page = req.params.page;
-//   const id = req.params.id;
-
-//   const index = parseInt(page);
-//   const ads = result[index].ads;
-
-//   // console.log(page, id, ads.length);
-
-//   const correctAd = ads.filter((ad) => ad.id == id);
-
-//   res.json({ ad: correctAd });
-
-//   // axios.get();
-// });
 
 console.log("Number of Pages: ", pages.length);
 app.listen(PORT, () => console.log(`Running on PORT ${PORT}`));
