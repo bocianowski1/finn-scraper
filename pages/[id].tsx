@@ -1,4 +1,5 @@
 import axios from "axios";
+import Image from "next/image";
 import { useState } from "react";
 import { FaCaretLeft, FaCaretRight } from "react-icons/fa";
 
@@ -91,7 +92,7 @@ const AdvertismentPage = ({ ad }: Props) => {
             <FaCaretLeft className=" transition ease-in-out" />
           </div>
           <div className="aspect-auto w-full shadow-xl rounded-xl md:mx-4 lg:mx-12">
-            <img
+            <Image
               src={add.images[currentImage]}
               alt=""
               className="w-full h-full object-center rounded-xl

@@ -1,8 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { BsMegaphone } from "react-icons/bs";
-import { FaBed } from "react-icons/fa";
 
 interface Ad {
   id: number;
@@ -53,7 +51,7 @@ const Advertisement = ({
             <div className="flex flex-col p-2 m-auto">
               <div className="flex justify-around w-full h-48 md:h-40">
                 <div className="aspect-auto w-full">
-                  <img
+                  <Image
                     src={images[0]}
                     alt=""
                     className="w-full h-full object-center 
@@ -62,7 +60,7 @@ const Advertisement = ({
                 </div>
                 <div className="w-2 h-full" />
                 <div className="aspect-auto w-full">
-                  <img
+                  <Image
                     src={images[1]}
                     alt=""
                     className="w-full h-full object-center 
