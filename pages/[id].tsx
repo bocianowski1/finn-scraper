@@ -48,15 +48,18 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context: any) => {
   const id = context.params.id;
+  try {
+    const res = await axios.get(`https://finn-api.herokuapp.com/${id}/`);
+    const ad = await res.data.ad;
 
-  const res = await axios.get(`https://finn-api.herokuapp.com/${id}/`);
-  const ad = await res.data.ad;
-
-  return {
-    props: {
-      ad,
-    },
-  };
+    return {
+      props: {
+        ad,
+      },
+    };
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 const AdvertismentPage = ({ ad }: Props) => {
