@@ -30,7 +30,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="bg-stone-300">
-        <div className="px-10 font-medium text-xl pt-36 pb-4">
+        <div className="px-10 font-medium text-xl pt-28 pb-4 text-right">
           {area.length === 0 ? (
             <h3>Resultater for hele Norge:</h3>
           ) : (
