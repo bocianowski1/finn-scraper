@@ -15,7 +15,7 @@ export default function Home() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/${area}`)
+      .get(`https://finn-api.herokuapp.com/${area}`)
       .then((res) => {
         setAds(res.data.result);
       })

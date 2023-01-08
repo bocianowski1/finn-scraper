@@ -29,7 +29,7 @@ interface Ad {
 }
 
 export const getStaticPaths = async () => {
-  const res = await axios.get("http://localhost:8000/");
+  const res = await axios.get("https://finn-api.herokuapp.com/");
   const data = await res.data.result;
 
   const paths = data.map((ad: Ad) => {
@@ -49,7 +49,7 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (context: any) => {
   const id = context.params.id;
 
-  const res = await axios.get(`http://localhost:8000/${id}/`);
+  const res = await axios.get(`https://finn-api.herokuapp.com/${id}/`);
   const ad = await res.data.ad;
 
   return {
