@@ -2,8 +2,14 @@ const PORT = process.env.PORT || 8000;
 const express = require("express");
 const axios = require("axios");
 const cheerio = require("cheerio");
+// const path = require("path"); // Serve static files from the React frontend app
 
 const app = express();
+// app.use(express.static(path.join(__dirname, "frontend/"))); // Anything that doesn't match the above, send back index.html
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname + "./../frontend/pages/_app.tsx"));
+// });
+
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
   res.header(
