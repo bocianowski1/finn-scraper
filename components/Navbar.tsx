@@ -19,13 +19,15 @@ const Navbar = () => {
       fixed left-0 top-0 z-20"
       >
         <Link href={"/"} className="cursor-pointer flex flex-col">
-          <h1 className="text-left text-4xl font-bold pt-2 px-2 mx-4">
+          <h1 className="text-left text-3xl md:text-4xl font-bold pt-2 px-2 mx-4 ">
             Fake Finn
           </h1>
-          <h3 className="font-thin mx-4 px-2 ">Norges nestbeste leiemarked.</h3>
+          <h3 className="font-thin mx-4 px-2 text-xs md:text-lg">
+            Norges nestbeste leiemarked.
+          </h3>
         </Link>
 
-        <ul className="flex items-center mx-4 px-2 lg:px-8 lg:pb-8">
+        <ul className="flex items-center mr-4 px-2 lg:px-8 lg:pb-8">
           <li className="p-2 transition ease-in-out hover:-translate-y-0.5 duration-300 mx-1">
             <Link
               className="cursor-pointer text-2xl"

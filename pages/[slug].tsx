@@ -53,12 +53,12 @@ const AdvertismentPage = ({ ad }: Props) => {
   if (!ad) {
     return <Error404 />;
   }
-  // const [currentImage, setCurrentImage] = useState(0);
+  const [currentImage, setCurrentImage] = useState(0);
 
-  // const changeImage = () => {
-  //   if (currentImage == 1) setCurrentImage(0);
-  //   else setCurrentImage(1);
-  // };
+  const changeImage = () => {
+    if (currentImage == 1) setCurrentImage(0);
+    else setCurrentImage(1);
+  };
 
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -71,7 +71,7 @@ const AdvertismentPage = ({ ad }: Props) => {
         className="bg-neutral-100
                     p-4 mx-4 rounded-xl shadow-md flex flex-col"
       >
-        {/* <div
+        <div
           className="flex w-full mt-4 md:mt-6 lg:mb-6 lg:mt-12 h-48 md:h-72
            lg:h-96  lg:mx-auto lg:px-16 
         "
@@ -100,7 +100,7 @@ const AdvertismentPage = ({ ad }: Props) => {
           >
             <FaCaretRight />
           </div>
-        </div> */}
+        </div>
         <div className="">
           <div className="flex flex-col">
             <h1
