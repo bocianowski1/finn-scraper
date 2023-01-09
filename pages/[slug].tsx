@@ -57,7 +57,7 @@ export const getServerSideProps = async (context: any) => {
   let ad = null;
   try {
     ad = await (
-      await axios.get(`http://localhost:8000/${area}/${id}/`)
+      await axios.get(`https://finn-api.herokuapp.com/${area}/${id}/`)
     ).data.ad;
   } catch (err) {
     console.log("error: ", err);
