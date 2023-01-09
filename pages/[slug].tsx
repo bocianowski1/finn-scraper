@@ -2,12 +2,15 @@ import axios from "axios";
 import Image from "next/image";
 import { useState } from "react";
 import { FaCaretLeft, FaCaretRight } from "react-icons/fa";
+import Error404 from "./Error404";
 
 interface Props {
   params: {
-    id: string;
+    slug: string;
   };
-  ad: Ad[];
+
+  ad: Ad;
+  error: Error;
 }
 
 interface Ad {
@@ -28,48 +31,57 @@ interface Ad {
   images: string[];
 }
 
-export const getStaticPaths = async () => {
-  const res = await axios.get("https://finn-api.herokuapp.com/");
-  const data = await res.data.result;
+// export const getStaticPaths = async () => {
+//   const res = await axios.get("http://localhost:8000/oslo/");
+//   const data = await res.data.result;
 
-  const paths = data.map((ad: Ad) => {
-    return {
-      params: {
-        id: ad.id.toString(),
-      },
-    };
-  });
+//   const paths = data.map((ad: Ad) => {
+//     return {
+//       params: {
+//         id: ad.id.toString(),
+//       },
+//     };
+//   });
 
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// };
+
+export const getServerSideProps = async (context: any) => {
+  // const area = "oslo";
+  // const id = 181999071;
+  const id = context.params.slug.split("-")[0].toString();
+  const area = context.params.slug.split("-")[1];
+  let ad = null;
+  try {
+    ad = await (
+      await axios.get(`http://localhost:8000/${area}/${id}/`)
+    ).data.ad;
+  } catch (err) {
+    console.log("error: ", err);
+  }
   return {
-    paths,
-    fallback: false,
+    props: {
+      ad,
+    },
   };
 };
 
-export const getStaticProps = async (context: any) => {
-  const id = context.params.id;
-  try {
-    const res = await axios.get(`https://finn-api.herokuapp.com/${id}/`);
-    const ad = await res.data.ad;
-
-    return {
-      props: {
-        ad,
-      },
-    };
-  } catch (err) {
-    console.log(err);
-  }
-};
-
 const AdvertismentPage = ({ ad }: Props) => {
+  if (!ad) {
+    return <Error404 />;
+  }
+  // console.log(ad);
   const [currentImage, setCurrentImage] = useState(0);
-  const add = ad[0];
+  // const ad = ad;
 
   const changeImage = () => {
     if (currentImage == 1) setCurrentImage(0);
     else setCurrentImage(1);
   };
+
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
@@ -96,7 +108,7 @@ const AdvertismentPage = ({ ad }: Props) => {
           </div>
           <div className="aspect-auto w-full shadow-xl rounded-xl md:mx-4 lg:mx-12">
             <img
-              src={add.images[currentImage]}
+              src={ad.images[currentImage]}
               alt=""
               className="w-full h-full object-center rounded-xl
                           object-cover"
@@ -118,10 +130,10 @@ const AdvertismentPage = ({ ad }: Props) => {
                         md:text-4xl md:py-8 md:px-2 
                         lg:px-4 lg:text-5xl"
             >
-              {add.title}
+              {ad.title}
             </h1>
             <a
-              href={add.link}
+              href={ad.link}
               target="_blank"
               rel="noreferrer"
               className="bg-gradient-to-b from-stone-100 to-neutral-100 
@@ -144,19 +156,19 @@ const AdvertismentPage = ({ ad }: Props) => {
                             md:text-left md:text-xl
                             lg:text-left lg:text-2xl"
               >
-                {add.location.address}
+                {ad.location.address}
               </h3>
               <div className="flex flex-col">
                 <div className="flex flex-col">
                   <span className="font-medium">Månedsleie</span>
                   <span className="font-semibold text-2xl">
                     {formatter
-                      .format(add.features.monthlyRent)
+                      .format(ad.features.monthlyRent)
                       .substring(
                         1,
-                        add.features.monthlyRent.toString().length === 3
-                          ? add.features.monthlyRent.toString().length + 1
-                          : add.features.monthlyRent.toString().length + 2
+                        ad.features.monthlyRent.toString().length === 3
+                          ? ad.features.monthlyRent.toString().length + 1
+                          : ad.features.monthlyRent.toString().length + 2
                       )
                       .replace(",", " ")}
                     {" kr"}
@@ -165,24 +177,24 @@ const AdvertismentPage = ({ ad }: Props) => {
                 <div className="py-2 font-thin grid grid-cols-1 gap-1">
                   <div>
                     <span className="font-medium mr-4">Primærrom:</span>
-                    {add.features.squareMeters} m
+                    {ad.features.squareMeters} m
                     <span className="text-xs absolute">2</span>
                   </div>
                   <div>
                     <span className="font-medium mr-4">Utleier:</span>
-                    {add.landlord}
+                    {ad.landlord}
                   </div>
                   <div>
                     <span className="font-medium mr-4">Soverom:</span>
-                    {add.bedrooms}
+                    {ad.bedrooms}
                   </div>
                   <div>
                     <span className="font-medium mr-4">Boligtype:</span>
-                    {add.housingType}
+                    {ad.housingType}
                   </div>
                   <div className="flex flex-col py-4">
                     <span className="font-medium mr-4">Beskrivelse</span>
-                    {add.housingType} i {add.location.city} med {add.bedrooms}{" "}
+                    {ad.housingType} i {ad.location.city} med {ad.bedrooms}{" "}
                     soverom.
                   </div>
                 </div>

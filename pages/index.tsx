@@ -2,12 +2,13 @@ import Head from "next/head";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import AdContainer from "../components/AdContainer";
+import Link from "next/link";
 
 export default function Home() {
   const [ads, setAds] = useState([]);
-  const [area, setArea] = useState("");
-  const cities = ["norge", "oslo", "viken", "bergen", "trondheim"];
-  const [selected, setSelected] = useState("norge");
+  const [area, setArea] = useState("oslo");
+  const cities = ["oslo", "viken", "bergen", "trondheim", "stavanger"];
+  const [selected, setSelected] = useState("oslo");
 
   const capitalize = (str: string) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -15,7 +16,7 @@ export default function Home() {
 
   useEffect(() => {
     axios
-      .get(`https://finn-api.herokuapp.com/${area}`)
+      .get(`http://localhost:8000/${area}`)
       .then((res) => {
         setAds(res.data.result);
       })
@@ -30,14 +31,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="bg-stone-300">
-        <div className="px-10 font-medium text-xl pt-28 pb-4 text-right">
-          {area.length === 0 ? (
-            <h3>Resultater for hele Norge:</h3>
-          ) : (
-            <h3>Resultater for {capitalize(area)}:</h3>
-          )}
-        </div>
-        <ul className="px-10 md:grid grid-flow-row grid-cols-5 gap-4 ">
+        <ul className="px-10 pt-36 md:grid grid-flow-row grid-cols-5 gap-4 ">
           {cities.map((city) => (
             <div key={city}>
               {city === selected ? (
@@ -47,10 +41,7 @@ export default function Home() {
               transition ease-in-out hover:shadow-lg
               hover:cursor-pointer duration-300"
                   onClick={() => {
-                    if (city === "norge") {
-                      city = "";
-                      setSelected("norge");
-                    } else setSelected(city);
+                    setSelected(city);
                     setArea(city);
                   }}
                 >
@@ -63,10 +54,7 @@ export default function Home() {
               transition ease-in-out hover:shadow-xl hover:-translate-y-1 
               hover:cursor-pointer duration-300"
                   onClick={() => {
-                    if (city === "norge") {
-                      city = "";
-                      setSelected("norge");
-                    } else setSelected(city);
+                    setSelected(city);
                     setArea(city);
                   }}
                 >
@@ -76,7 +64,7 @@ export default function Home() {
             </div>
           ))}
         </ul>
-        <AdContainer ads={ads} />
+        <AdContainer area={area} ads={ads} />
       </main>
     </div>
   );

@@ -4,6 +4,7 @@ import { useState } from "react";
 
 interface Ad {
   id: number;
+  area: string;
   title: string;
   features: {
     squareMeters: number;
@@ -22,6 +23,7 @@ interface Ad {
 
 const Advertisement = ({
   id,
+  area,
   title,
   features,
   link,
@@ -38,6 +40,8 @@ const Advertisement = ({
     currency: "USD",
   });
 
+  const slug = `${id}-${area}`;
+
   return (
     <>
       {features.monthlyRent && (
@@ -47,7 +51,7 @@ const Advertisement = ({
         transition ease-in-out md:hover:-translate-y-1.5 
               hover:cursor-pointer hover:shadow-2xl duration-300"
         >
-          <Link href={`/${id}`}>
+          <Link href={`/${slug}`}>
             <div className="flex flex-col p-2 m-auto">
               <div className="flex justify-around w-full h-48 md:h-40">
                 <div className="aspect-auto w-full">
