@@ -33,10 +33,21 @@ const Advertisement = ({
   landlord,
   images,
 }: Ad) => {
-  const formatter = new Intl.NumberFormat(undefined, {
+  const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
   });
+
+  const formatPrice = (price: number) => {
+    const string = price.toString();
+    if (string.length == 4)
+      return string.replace(string[0], string[0] + " ") + " kr";
+    if (string.length == 5)
+      return string.replace(string[1], string[1] + " ") + " kr";
+    if (string.length == 6)
+      return string.replace(string[2], string[2] + " ") + " kr";
+    else return string + " kr";
+  };
 
   const slug = `${id}-${area}`;
 
@@ -88,19 +99,7 @@ const Advertisement = ({
                 </div>
 
                 <div className="py-2 grid grid-cols-2 gap-20 font-semibold relative">
-                  <span>
-                    {features.monthlyRent &&
-                      formatter
-                        .format(features.monthlyRent)
-                        .substring(
-                          1,
-                          features.monthlyRent.toString().length === (1 || 3)
-                            ? features.monthlyRent.toString().length + 1
-                            : features.monthlyRent.toString().length + 2
-                        )
-                        .replace(",", " ")}
-                    {" kr"}
-                  </span>
+                  <span>{formatPrice(features.monthlyRent)}</span>
                   <div>
                     {features.squareMeters} m
                     <span className=" text-xs font-bold absolute">2</span>
