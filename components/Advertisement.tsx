@@ -33,8 +33,6 @@ const Advertisement = ({
   landlord,
   images,
 }: Ad) => {
-  const [pageNumber, setPageNumber] = useState(0);
-
   const formatter = new Intl.NumberFormat(undefined, {
     style: "currency",
     currency: "USD",
